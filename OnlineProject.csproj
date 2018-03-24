@@ -377,6 +377,11 @@
     <Compile Include="Assets\Resources\Script\CameraFollow.cs" />
     <Compile Include="Assets\Resources\Script\GUIcontroller.cs" />
     <Compile Include="Assets\Resources\Script\GunController.cs" />
+    <Compile Include="Assets\Resources\Script\MapGenerator\CameraMovement.cs" />
+    <Compile Include="Assets\Resources\Script\MapGenerator\MapDisplay.cs" />
+    <Compile Include="Assets\Resources\Script\MapGenerator\Noise.cs" />
+    <Compile Include="Assets\Resources\Script\MapGenerator\TilePRNGMapGenerator.cs" />
+    <Compile Include="Assets\Resources\Script\MapGenerator\TilePRNGMapGenerator2.cs" />
     <Compile Include="Assets\Resources\Script\NetworkController.cs" />
     <Compile Include="Assets\Resources\Script\PlayerController.cs" />
     <Compile Include="Assets\Resources\Script\PlayerNetworkSync.cs" />
