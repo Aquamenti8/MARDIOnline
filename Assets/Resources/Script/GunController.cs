@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour {
     public GameObject[] playerList;
     public GameObject laser;
     public float laserLength;
+    private Vector3 mousePosition;
     float angleShoot;
 
     
@@ -29,7 +30,8 @@ public class GunController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (player == null)          //GET PLAYER
         {
             playerList = GameObject.FindGameObjectsWithTag("Player");
@@ -48,7 +50,7 @@ public class GunController : MonoBehaviour {
         }
         if (player != null)       //ROTATE TO MOUSE
             {
-            
+            //transform.position = player.transform.position;
             GetGunFire();
             FaceMouse();
         }
@@ -56,19 +58,10 @@ public class GunController : MonoBehaviour {
 
     void FaceMouse()
     {
-        /*
-        // Get Angle in Radians
-        float AngleRad = Mathf.Atan2(Input.mousePosition.y - transform.position.y, Input.mousePosition.x - transform.position.x);
-        // Get Angle in Degrees
-        float AngleDeg = (180 / Mathf.PI) * AngleRad;
-        // Rotate Object
-        this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
-        */
 
-        Vector3 mousePosition = Input.mousePosition;
         Vector2 direction = new Vector2(
-                mousePosition.x - player.transform.position.x,
-                mousePosition.y - player.transform.position.y
+                mousePosition.x - transform.position.x,
+                mousePosition.y - transform.position.y
             );
 
         transform.right = direction;
@@ -83,7 +76,6 @@ public class GunController : MonoBehaviour {
          if (Input.GetMouseButtonDown(0))
         {
             //Tire un laser en direction de la souri!
-            Vector3 mousePosition = Input.mousePosition;
             Vector2 direction = new Vector2(
                 mousePosition.x - transform.position.x,
                 mousePosition.y - transform.position.y
@@ -92,8 +84,8 @@ public class GunController : MonoBehaviour {
 
             laserLength = Vector3.Distance(transform.position, mousePosition);
 
-            GameObject laserInstance = (GameObject)Instantiate(laser, transform.position, Quaternion.Euler(0, 0, angleShoot));
-            laserInstance.transform.localScale = new Vector3(laserLength, 100, 1);
+            GameObject laserInstance = (GameObject)Instantiate(laser, (transform.position+mousePosition)/2, Quaternion.Euler(0, 0, angleShoot));
+            laserInstance.transform.localScale = new Vector3(laserLength*10, 100, 1);
 
         }
     }
